@@ -4,17 +4,31 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives: 2016/1 | Day Day Up</title>
+  <title>Struts 传参数 | Day Day Up</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to WangyuAr&apos;s blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Day Day Up">
-<meta property="og:url" content="http://yoursite.com/archives/2016/01/index.html">
+  <meta name="description" content="##Struts传参数的大致有三种方法
+###如，登陆表单login.jsp：
+&amp;lt;form action=&amp;quot;login&amp;quot; method=&amp;quot;post&amp;quot; name=&amp;quot;form1&amp;quot;&amp;gt;
+用户名：&amp;lt;s:textfield name=&amp;quot;username&amp;quot;/&amp;gt;&amp;lt;br/&amp;gt;
+密 码：&amp;lt;s:pas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Struts 传参数">
+<meta property="og:url" content="http://yoursite.com/2016/01/23/Struts-传参数/index.html">
 <meta property="og:site_name" content="Day Day Up">
-<meta property="og:description" content="Welcome to WangyuAr&apos;s blog">
+<meta property="og:description" content="##Struts传参数的大致有三种方法
+###如，登陆表单login.jsp：
+&amp;lt;form action=&amp;quot;login&amp;quot; method=&amp;quot;post&amp;quot; name=&amp;quot;form1&amp;quot;&amp;gt;
+用户名：&amp;lt;s:textfield name=&amp;quot;username&amp;quot;/&amp;gt;&amp;lt;br/&amp;gt;
+密 码：&amp;lt;s:pas">
+<meta property="og:image" content="http://yoursite.com/117.jpg">
+<meta property="og:updated_time" content="2016-01-23T08:01:26.531Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Day Day Up">
-<meta name="twitter:description" content="Welcome to WangyuAr&apos;s blog">
+<meta name="twitter:title" content="Struts 传参数">
+<meta name="twitter:description" content="##Struts传参数的大致有三种方法
+###如，登陆表单login.jsp：
+&amp;lt;form action=&amp;quot;login&amp;quot; method=&amp;quot;post&amp;quot; name=&amp;quot;form1&amp;quot;&amp;gt;
+用户名：&amp;lt;s:textfield name=&amp;quot;username&amp;quot;/&amp;gt;&amp;lt;br/&amp;gt;
+密 码：&amp;lt;s:pas">
   
     <link rel="alternative" href="/atom.xml" title="Day Day Up" type="application/atom+xml">
   
@@ -204,80 +218,181 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-Struts-传参数" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/01/23/Struts-传参数/" class="archive-article-date">
-  	<time datetime="2016-01-23T07:31:21.000Z" itemprop="datePublished">Jan 23</time>
+    <div class="article-meta">
+      <a href="/2016/01/23/Struts-传参数/" class="article-date">
+  	<time datetime="2016-01-23T07:31:21.000Z" itemprop="datePublished">2016-01-23</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/23/Struts-传参数/">Struts 传参数</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Struts 传参数
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
 	</div>
 
-          
+        
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##Struts传参数的大致有三种方法</p>
+<p>###如，登陆表单login.jsp：</p>
+<pre><code>&lt;form action=&quot;login&quot; method=&quot;post&quot; name=&quot;form1&quot;&gt;
+用户名：&lt;s:textfield name=&quot;username&quot;/&gt;&lt;br/&gt;
+密 码：&lt;s:password name=&quot;password&quot;/&gt;&lt;br/&gt;
+&lt;s:submit value=&quot;提交&quot;/&gt; 
+&lt;/form&gt;
+</code></pre><p>###1. 在Action类中定义表单属性，两者属性名称必须一致。提供setter，getter方法。<br>这种接收参数的方法，方便简单，但是结构性不是很好，且当表单传递来的参数很多的时候，整个Action类中充斥着setter，getter方法，程序结构不是很美观。</p>
+<p>###2. 把表单传递过来的参数封装成一个类，然后调用其中的属性.<br>如，把login.jsp页面要传来的参数进行封装</p>
+<pre><code>private String username;
+private String password;
+
+public String getUsername() {
+return username;
+}
+ public void setUsername(String username) {
+this.username = username;
+}
+public String getPassword() {
+return password;
+}
+public void setPassword(String password) {
+this.password = password;
+}
+</code></pre><p>然后再Action方法中，定义该类的对象就可以了，如</p>
+<pre><code>public class loginAction extends ActionSupport{
+
+private Users users;
+
+public Users getUsers(){
+
+return users;
+
+}
+
+public void setUsers(Users users){
+
+this.users=users;
+
+}
+</code></pre><p>/*</p>
+<p>传递过来的参数都封装在users中了，用getter方法取值就可以了</p>
+<p>*/</p>
+<p>}</p>
+<p>通过这种方法传值，还必须在jsp页面做一下处理，login.jsp中from1的属性名应该改成这样：</p>
+<p>登陆表单login.jsp：</p>
+<pre><code>&lt;form action=&quot;login&quot; method=&quot;post&quot; name=&quot;form1&quot;&gt;
+ 用户名：&lt;s:textfield name=&quot;users.username&quot;/&gt;&lt;br/&gt;
+ 密 码：&lt;s:password name=&quot;users.password&quot;/&gt;&lt;br/&gt;
+           &lt;s:submit value=&quot;提交&quot;/&gt; 
+ &lt;/form&gt;
+</code></pre><p>这种方法，在struts开发中是很常用的一种方法！</p>
+<p>###3.通过实现ModelDriven接口接收表单数据<br>首先Action类必须实现ModelDriven接口，同样把表单传来的数据封装起来，Action类中必须实例化该对象，并且要重写getModel()方法</p>
+<pre><code>public class loginAction extends ActionSupport implements ModelDriven&lt;Users&gt;{
+
+private Users users =new Users();
+
+ public Users getModel(){
+
+ return users;
+
+ }
+
+/* 
+
+表单传来的参数封装在users对象中
+
+表单属性名不需要加上引用users对象，直接传参数名
+
+ */
+
+}
+</code></pre><p><img src="/117.jpg" alt=""></p>
+
+      
+    </div>
+    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/01/19/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/01/19/hello-world/" class="archive-article-date">
-  	<time datetime="2016-01-19T06:06:12.958Z" itemprop="datePublished">Jan 19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/19/hello-world/">Hello World</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-    
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Struts-传参数" data-title="Struts 传参数" data-url="http://yoursite.com/2016/01/23/Struts-传参数/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -303,8 +418,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false
