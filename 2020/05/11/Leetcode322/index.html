@@ -3,18 +3,39 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>每天一道leetcode322这题dfs居然超时 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="404">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/404.html">
+  <meta name="description" content="给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。
+输入: coins = [1, 2, 5], amount = 11
+输出: 3 
+解释: 11 = 5 + 5 + 1
+
+输入: coins = [2], amount = 3
+输出: -1
+思路： 首先想到的肯定是递归回溯深搜啊，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每天一道leetcode322这题dfs居然超时">
+<meta property="og:url" content="http://yoursite.com/2020/05/11/Leetcode322/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="404">
-<meta property="og:updated_time" content="2016-01-19T04:51:38.641Z">
+<meta property="og:description" content="给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。
+输入: coins = [1, 2, 5], amount = 11
+输出: 3 
+解释: 11 = 5 + 5 + 1
+
+输入: coins = [2], amount = 3
+输出: -1
+思路： 首先想到的肯定是递归回溯深搜啊，">
+<meta property="og:updated_time" content="2020-05-11T15:23:25.961Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="404">
+<meta name="twitter:title" content="每天一道leetcode322这题dfs居然超时">
+<meta name="twitter:description" content="给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。
+输入: coins = [1, 2, 5], amount = 11
+输出: 3 
+解释: 11 = 5 + 5 + 1
+
+输入: coins = [2], amount = 3
+输出: -1
+思路： 首先想到的肯定是递归回溯深搜啊，">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,37 +81,103 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="default-undefined" class="article article-type-default" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Leetcode322" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/404.html" class="article-date">
-  <time datetime="2017-05-20T04:22:23.154Z" itemprop="datePublished">2017-05-20</time>
+    <a href="/2020/05/11/Leetcode322/" class="article-date">
+  <time datetime="2020-05-11T15:20:27.000Z" itemprop="datePublished">2020-05-11</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      每天一道leetcode322这题dfs居然超时
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <html>
-    <head>
-         <meta charset="UTF-8">
-         <title>404</title>                                                                                                                                        
-    </head>
-    <body>
-         <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"></script>
-    </body>
-</html>
+        <p>给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。</p>
+<pre><code>输入: coins = [1, 2, 5], amount = 11
+输出: 3 
+解释: 11 = 5 + 5 + 1
+
+输入: coins = [2], amount = 3
+输出: -1
+</code></pre><p>思路： 首先想到的肯定是递归回溯深搜啊，可惜超时了。超时代码：</p>
+<pre><code>class Solution {
+    int[] coins;
+    int amount;
+    int res = 10000;
+    public int coinChange(int[] coins, int amount) {
+        if(amount==0)
+            return 0;
+        this.coins = coins;
+        this.amount = amount;
+        for(int i =0;i&lt;coins.length;i++){
+            if(coins[i]&gt;amount)
+                continue;
+            dfs(coins[i],0);
+        }
+        if(res==10000)
+            return -1;
+        else
+            return res+1;
+    }
+    public void dfs(int curAmount, int curNum) {
+        if(curAmount&gt;amount){
+            return;
+        }
+        if(curAmount == amount){
+            if(curNum&lt;res)
+                res = curNum;
+            return ;
+        }
+        for(int i =0;i&lt;coins.length;i++){
+            if(coins[i]&gt;amount)
+                continue;
+            dfs(curAmount+coins[i], curNum+1);
+        }
+    }
+}
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/404.html" data-id="cka2hdwm0000048uztzufa27n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/05/11/Leetcode322/" data-id="cka44mnsb00067kuz75nb5q84" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2020/05/12/FR中的softmax改进/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/11/Leetcode34/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">每天一道leetcode34（二分算法总结）</div>
+    </a>
+  
+</nav>
+
   
 </article>
 

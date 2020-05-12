@@ -5,16 +5,19 @@
   
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="404">
-<meta property="og:type" content="website">
+  <meta name="description" content="#SpringMVCDispatcherServlet会根据一个XML文件来加载Spring应用上下文，这个XML文件名是servlet名-servlet.xml。对于其他一些Bean，是否也要配置在该xml文件中？
+我们将Spring配置分为了多个xml文件：一个用于服务层、一个用于持久层还有一个用于数据源配置。通过ContextLoaderListener来加载其他的配置文件，ContextL">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/404.html">
+<meta property="og:url" content="http://yoursite.com/2017/08/06/SpringMVC/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="404">
-<meta property="og:updated_time" content="2016-01-19T04:51:38.641Z">
+<meta property="og:description" content="#SpringMVCDispatcherServlet会根据一个XML文件来加载Spring应用上下文，这个XML文件名是servlet名-servlet.xml。对于其他一些Bean，是否也要配置在该xml文件中？
+我们将Spring配置分为了多个xml文件：一个用于服务层、一个用于持久层还有一个用于数据源配置。通过ContextLoaderListener来加载其他的配置文件，ContextL">
+<meta property="og:updated_time" content="2017-08-06T15:18:20.618Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="404">
+<meta name="twitter:description" content="#SpringMVCDispatcherServlet会根据一个XML文件来加载Spring应用上下文，这个XML文件名是servlet名-servlet.xml。对于其他一些Bean，是否也要配置在该xml文件中？
+我们将Spring配置分为了多个xml文件：一个用于服务层、一个用于持久层还有一个用于数据源配置。通过ContextLoaderListener来加载其他的配置文件，ContextL">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,10 +63,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="default-undefined" class="article article-type-default" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-SpringMVC" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/404.html" class="article-date">
-  <time datetime="2017-05-20T04:22:23.154Z" itemprop="datePublished">2017-05-20</time>
+    <a href="/2017/08/06/SpringMVC/" class="article-date">
+  <time datetime="2017-08-06T15:18:20.618Z" itemprop="datePublished">2017-08-06</time>
 </a>
     
   </div>
@@ -72,25 +75,50 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <html>
-    <head>
-         <meta charset="UTF-8">
-         <title>404</title>                                                                                                                                        
-    </head>
-    <body>
-         <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"></script>
-    </body>
-</html>
+        <p>#SpringMVC<br>DispatcherServlet会根据一个XML文件来加载Spring应用上下文，这个XML文件名是servlet名-servlet.xml。对于其他一些Bean，是否也要配置在该xml文件中？</p>
+<p>我们将Spring配置分为了多个xml文件：一个用于服务层、一个用于持久层还有一个用于数据源配置。通过ContextLoaderListener来加载其他的配置文件，ContextLoaderListener是一个Servlet监听器，为了使用它需要在web.xml中添加<listener>声明：</listener></p>
+<pre><code>&lt;listener&gt;
+    &lt;listener-class&gt;
+        org.springframework.web.context.ContextLoaderListener
+    &lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre><p>我们必须要告诉ContextLoaderListener需要加载哪些配置文件。如果没有指定，上下文加载器会查找/WEB-INF/applicationContext.xml这个Spring配置文件。<br>为了指定ContextLoaderListener需要加载哪些配置文件，需要在servlet上下文中配置contextConfigLocation参数：</p>
+<pre><code>&lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;
+        //配置文件路径
+    &lt;/param-value&gt;
+&lt;/context-param&gt;
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/404.html" data-id="cka2hdwm0000048uztzufa27n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/06/SpringMVC/" data-id="cka2hdwmx000848uzbz62g08m" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2020/05/11/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/20/Python学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
   
 </article>
 
