@@ -105,7 +105,7 @@
     /  \
    15   7
 返回其层次遍历结">
-<meta property="og:updated_time" content="2020-05-13T13:27:15.878Z">
+<meta property="og:updated_time" content="2020-05-13T13:29:52.753Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每天一道leetcode34（BFS）">
 <meta name="twitter:description" content="今天接了刘老板个电话，问我实验结果。关键现在的方法不适合应用在pose变化的人脸上，硬要做。烦得很。今天的每日一题很简单，就是树的层次遍历。
@@ -398,8 +398,12 @@
   [15,7]
 ]
 </code></pre><p>思路： 利用队列，先进先出，注意记录当前层和当前层的节点数。</p>
-<p>代码：<br>    class Solution {<br>        public List<list<integer>&gt; levelOrder(TreeNode root) {<br>            List<list<integer>&gt; res = new ArrayList();</list<integer></list<integer></p>
-<pre><code>        if(root==null)
+<p>代码：</p>
+<pre><code>class Solution {
+    public List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) {
+        List&lt;List&lt;Integer&gt;&gt; res = new ArrayList();
+
+        if(root==null)
             return res;
 
         Queue&lt;TreeNode&gt; q = new LinkedList();
@@ -461,6 +465,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/14/Leetcode124/" rel="prev" title="每天一道leetcode124 (递归回溯最长路径)">
+                每天一道leetcode124 (递归回溯最长路径) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -528,7 +536,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
