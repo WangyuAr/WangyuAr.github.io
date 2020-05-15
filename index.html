@@ -261,6 +261,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/15/leetcode560/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Day Day Up">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/15/leetcode560/" itemprop="url">每天一道leetcode34（前缀和）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-05-15T10:17:27+08:00">
+                2020-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>给定一个整数数组和一个整数 k，你需要找到该数组中和为 k 的连续的子数组的个数。</strong><br><a href="https://leetcode-cn.com/problems/subarray-sum-equals-k/" target="_blank" rel="external">https://leetcode-cn.com/problems/subarray-sum-equals-k/</a></p>
+<pre><code>输入:nums = [1,1,1], k = 2
+输出: 2 , [1,1] 与 [1,1] 为两种不同的情况。
+</code></pre><p>前缀和的思路有点类似动态规划。</p>
+<p>用一个数组presum记录，presum[i]表示nums[0]…nums[i]的和。</p>
+<pre><code> // 计算前缀和数组
+int[] preSum = new int[len + 1];
+preSum[0] = 0;
+for (int i = 0; i &lt; len; i++) {
+    preSum[i + 1] = preSum[i] + nums[i];
+}
+</code></pre><p>和为K的连续数字，即preSum[left] - preSum[right] == k</p>
+<pre><code>for (int left = 0; left &lt; len; left++) {
+    for (int right = left; right &lt; len; right++) {
+        // 区间和 [left..right]
+        if (preSum[right + 1] - preSum[left] == k) {
+            count++; // 满足条件的数目
+        }
+    }
+}
+</code></pre><p>为了解决两层for循环，使用hashmap进行优化：key值为当前前缀和，value是key值的次数</p>
+<pre><code>public int subarraySum(int[] nums, int k) {
+        Map&lt;Integer,Integer&gt; map = new HashMap();
+        int pre = 0; int res =0;
+        map.put(0,1);
+        for(int i =0;i&lt;nums.length;i++){
+            pre = pre + nums[i];
+            if(map.containsKey(pre - k)){ // 存在pre - k，就加上出现的次数
+                res = res + map.get(pre-k);
+            }
+            map.put(pre, map.getOrDefault(pre,0)+1);//pre出现次数+1
+        }
+        return res;
+    }
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/14/Leetcode124/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1776,196 +1951,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/23/Struts-传参数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wang Yu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Day Day Up">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/01/23/Struts-传参数/" itemprop="url">Struts 传参数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2016-01-23T15:31:21+08:00">
-                2016-01-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Struts_u4F20_u53C2_u6570_u7684_u5927_u81F4_u6709_u4E09_u79CD_u65B9_u6CD5"><a href="#Struts_u4F20_u53C2_u6570_u7684_u5927_u81F4_u6709_u4E09_u79CD_u65B9_u6CD5" class="headerlink" title="Struts传参数的大致有三种方法"></a>Struts传参数的大致有三种方法</h2><h3 id="u5982_uFF0C_u767B_u9646_u8868_u5355login-jsp_uFF1A"><a href="#u5982_uFF0C_u767B_u9646_u8868_u5355login-jsp_uFF1A" class="headerlink" title="如，登陆表单login.jsp："></a>如，登陆表单login.jsp：</h3><pre><code>&lt;form action=&quot;login&quot; method=&quot;post&quot; name=&quot;form1&quot;&gt;
-用户名：&lt;s:textfield name=&quot;username&quot;/&gt;&lt;br/&gt;
-密 码：&lt;s:password name=&quot;password&quot;/&gt;&lt;br/&gt;
-&lt;s:submit value=&quot;提交&quot;/&gt; 
-&lt;/form&gt;
-</code></pre><h3 id="1-__u5728Action_u7C7B_u4E2D_u5B9A_u4E49_u8868_u5355_u5C5E_u6027_uFF0C_u4E24_u8005_u5C5E_u6027_u540D_u79F0_u5FC5_u987B_u4E00_u81F4_u3002_u63D0_u4F9Bsetter_uFF0Cgetter_u65B9_u6CD5_u3002"><a href="#1-__u5728Action_u7C7B_u4E2D_u5B9A_u4E49_u8868_u5355_u5C5E_u6027_uFF0C_u4E24_u8005_u5C5E_u6027_u540D_u79F0_u5FC5_u987B_u4E00_u81F4_u3002_u63D0_u4F9Bsetter_uFF0Cgetter_u65B9_u6CD5_u3002" class="headerlink" title="1. 在Action类中定义表单属性，两者属性名称必须一致。提供setter，getter方法。"></a>1. 在Action类中定义表单属性，两者属性名称必须一致。提供setter，getter方法。</h3><p>这种接收参数的方法，方便简单，但是结构性不是很好，且当表单传递来的参数很多的时候，整个Action类中充斥着setter，getter方法，程序结构不是很美观。</p>
-<h3 id="2-__u628A_u8868_u5355_u4F20_u9012_u8FC7_u6765_u7684_u53C2_u6570_u5C01_u88C5_u6210_u4E00_u4E2A_u7C7B_uFF0C_u7136_u540E_u8C03_u7528_u5176_u4E2D_u7684_u5C5E_u6027"><a href="#2-__u628A_u8868_u5355_u4F20_u9012_u8FC7_u6765_u7684_u53C2_u6570_u5C01_u88C5_u6210_u4E00_u4E2A_u7C7B_uFF0C_u7136_u540E_u8C03_u7528_u5176_u4E2D_u7684_u5C5E_u6027" class="headerlink" title="2. 把表单传递过来的参数封装成一个类，然后调用其中的属性."></a>2. 把表单传递过来的参数封装成一个类，然后调用其中的属性.</h3><p>如，把login.jsp页面要传来的参数进行封装</p>
-<pre><code>private String username;
-private String password;
-
-public String getUsername() {
-return username;
-}
- public void setUsername(String username) {
-this.username = username;
-}
-public String getPassword() {
-return password;
-}
-public void setPassword(String password) {
-this.password = password;
-}
-</code></pre><p>然后再Action方法中，定义该类的对象就可以了，如</p>
-<pre><code>public class loginAction extends ActionSupport{
-
-private Users users;
-
-public Users getUsers(){
-
-return users;
-
-}
-
-public void setUsers(Users users){
-
-this.users=users;
-
-}
-</code></pre><p>/*</p>
-<p>传递过来的参数都封装在users中了，用getter方法取值就可以了</p>
-<p>*/</p>
-<p>}</p>
-<p>通过这种方法传值，还必须在jsp页面做一下处理，login.jsp中from1的属性名应该改成这样：</p>
-<p>登陆表单login.jsp：</p>
-<pre><code>&lt;form action=&quot;login&quot; method=&quot;post&quot; name=&quot;form1&quot;&gt;
- 用户名：&lt;s:textfield name=&quot;users.username&quot;/&gt;&lt;br/&gt;
- 密 码：&lt;s:password name=&quot;users.password&quot;/&gt;&lt;br/&gt;
-           &lt;s:submit value=&quot;提交&quot;/&gt; 
- &lt;/form&gt;
-</code></pre><p>这种方法，在struts开发中是很常用的一种方法！</p>
-<h3 id="3-_u901A_u8FC7_u5B9E_u73B0ModelDriven_u63A5_u53E3_u63A5_u6536_u8868_u5355_u6570_u636E"><a href="#3-_u901A_u8FC7_u5B9E_u73B0ModelDriven_u63A5_u53E3_u63A5_u6536_u8868_u5355_u6570_u636E" class="headerlink" title="3.通过实现ModelDriven接口接收表单数据"></a>3.通过实现ModelDriven接口接收表单数据</h3><p>首先Action类必须实现ModelDriven接口，同样把表单传来的数据封装起来，Action类中必须实例化该对象，并且要重写getModel()方法</p>
-<pre><code>public class loginAction extends ActionSupport implements ModelDriven&lt;Users&gt;{
-
-private Users users =new Users();
-
- public Users getModel(){
-
- return users;
-
- }
-
-/* 
-
-表单传来的参数封装在users对象中
-
-表单属性名不需要加上引用users对象，直接传参数名
-
- */
-
-}
-</code></pre><p><img src="/117.jpg" alt=""></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2016,7 +2001,7 @@ private Users users =new Users();
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
