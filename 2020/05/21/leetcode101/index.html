@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="LeetCode," />
 
 
 
@@ -79,16 +79,58 @@
 
 
 
-<meta name="description">
+<meta name="description" content="https://leetcode-cn.com/problems/symmetric-tree/
+给定一个二叉树，检查它是否是镜像对称的。
+例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+
+但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+
+    1
+   / \
+  2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Day Day Up">
-<meta property="og:url" content="http://yoursite.com/2020/05/12/FR中的softmax改进/index.html">
+<meta property="og:title" content="每天一道leetcode101（对称二叉树）">
+<meta property="og:url" content="http://yoursite.com/2020/05/21/leetcode101/index.html">
 <meta property="og:site_name" content="Day Day Up">
-<meta property="og:description">
-<meta property="og:updated_time" content="2020-05-12T12:13:56.253Z">
+<meta property="og:description" content="https://leetcode-cn.com/problems/symmetric-tree/
+给定一个二叉树，检查它是否是镜像对称的。
+例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+
+但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+
+    1
+   / \
+  2">
+<meta property="og:updated_time" content="2020-05-21T03:01:29.621Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Day Day Up">
-<meta name="twitter:description">
+<meta name="twitter:title" content="每天一道leetcode101（对称二叉树）">
+<meta name="twitter:description" content="https://leetcode-cn.com/problems/symmetric-tree/
+给定一个二叉树，检查它是否是镜像对称的。
+例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+
+但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+
+    1
+   / \
+  2">
 
 
 
@@ -118,13 +160,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/05/12/FR中的softmax改进/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/05/21/leetcode101/"/>
 
 
 
 
 
-  <title> | Day Day Up</title>
+  <title>每天一道leetcode101（对称二叉树） | Day Day Up</title>
   
 
 
@@ -261,7 +303,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/12/FR中的softmax改进/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/21/leetcode101/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wang Yu">
@@ -278,7 +320,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">每天一道leetcode101（对称二叉树）</h1>
         
 
         <div class="post-meta">
@@ -290,8 +332,8 @@
               
                 <span class="post-meta-item-text">發表於</span>
               
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-05-12T20:13:56+08:00">
-                2020-05-12
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-05-21T10:55:43+08:00">
+                2020-05-21
               </time>
             
 
@@ -300,6 +342,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -328,7 +392,59 @@
       
 
       
-        
+        <p><a href="https://leetcode-cn.com/problems/symmetric-tree/" target="_blank" rel="external">https://leetcode-cn.com/problems/symmetric-tree/</a></p>
+<p><strong>给定一个二叉树，检查它是否是镜像对称的。</strong></p>
+<pre><code>例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+
+但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+
+    1
+   / \
+  2   2
+   \   \
+   3    3
+</code></pre><p>递归解法：</p>
+<pre><code>class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        return dfs(root,root);
+    }
+    public boolean dfs(TreeNode t1, TreeNode t2){
+        if(t1 == null &amp;&amp; t2 == null)
+            return true;
+
+        if(t1==null || t2==null)
+            return false;
+        return (t1.val==t2.val &amp;&amp; dfs(t1.left,t2.right) &amp;&amp; dfs(t2.left,t1.right));
+    }
+}
+</code></pre><p>迭代解法：注意元素的添加顺序，不是按着每行顺序，是镜像顺序</p>
+<pre><code>public boolean isSymmetric(TreeNode root) {
+    Queue&lt;TreeNode&gt; q = new LinkedList&lt;&gt;();
+    q.add(root);
+    q.add(root);
+    while (!q.isEmpty()) {
+        TreeNode t1 = q.poll();
+        TreeNode t2 = q.poll();
+        if (t1 == null &amp;&amp; t2 == null) continue;
+        if (t1 == null || t2 == null) return false;
+        if (t1.val != t2.val) return false;
+        q.add(t1.left);
+        q.add(t2.right);
+        q.add(t1.right);
+        q.add(t2.left);
+    }
+    return true;
+}
+</code></pre>
       
     </div>
     
@@ -343,6 +459,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          
+        </div>
+      
 
       
       
@@ -352,8 +474,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/11/Leetcode322/" rel="next" title="每天一道leetcode322这题dfs居然超时">
-                <i class="fa fa-chevron-left"></i> 每天一道leetcode322这题dfs居然超时
+              <a href="/2020/05/18/leetcode16/" rel="next" title="每天一道leetcode16（经典三指针法O（n^2））">
+                <i class="fa fa-chevron-left"></i> 每天一道leetcode16（经典三指针法O（n^2））
               </a>
             
           </div>
@@ -361,10 +483,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/12/leetcode236/" rel="prev" title="每天一道leetcode236（递归回溯算法）">
-                每天一道leetcode236（递归回溯算法） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

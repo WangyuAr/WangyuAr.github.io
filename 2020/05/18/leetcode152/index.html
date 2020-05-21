@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="LeetCode," />
 
 
 
@@ -79,16 +79,40 @@
 
 
 
-<meta name="description">
+<meta name="description" content="给你一个整数数组 nums ，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。
+输入: [2,3,-2,4]
+输出: 6
+解释: 子数组 [2,3] 有最大乘积 6。
+
+输入: [-2,0,-1]
+输出: 0
+解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。
+如果nums中不含有负数，那么动态规划的思路就很简单了。dpmax[i]代表从nu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Day Day Up">
-<meta property="og:url" content="http://yoursite.com/2020/05/12/FR中的softmax改进/index.html">
+<meta property="og:title" content="每天一道leetcode152（动态规划->乘积最大子数组）">
+<meta property="og:url" content="http://yoursite.com/2020/05/18/leetcode152/index.html">
 <meta property="og:site_name" content="Day Day Up">
-<meta property="og:description">
-<meta property="og:updated_time" content="2020-05-12T12:13:56.253Z">
+<meta property="og:description" content="给你一个整数数组 nums ，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。
+输入: [2,3,-2,4]
+输出: 6
+解释: 子数组 [2,3] 有最大乘积 6。
+
+输入: [-2,0,-1]
+输出: 0
+解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。
+如果nums中不含有负数，那么动态规划的思路就很简单了。dpmax[i]代表从nu">
+<meta property="og:updated_time" content="2020-05-18T01:38:58.630Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Day Day Up">
-<meta name="twitter:description">
+<meta name="twitter:title" content="每天一道leetcode152（动态规划->乘积最大子数组）">
+<meta name="twitter:description" content="给你一个整数数组 nums ，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。
+输入: [2,3,-2,4]
+输出: 6
+解释: 子数组 [2,3] 有最大乘积 6。
+
+输入: [-2,0,-1]
+输出: 0
+解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。
+如果nums中不含有负数，那么动态规划的思路就很简单了。dpmax[i]代表从nu">
 
 
 
@@ -118,13 +142,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/05/12/FR中的softmax改进/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/05/18/leetcode152/"/>
 
 
 
 
 
-  <title> | Day Day Up</title>
+  <title>每天一道leetcode152（动态规划->乘积最大子数组） | Day Day Up</title>
   
 
 
@@ -261,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/12/FR中的softmax改进/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/18/leetcode152/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wang Yu">
@@ -278,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">每天一道leetcode152（动态规划->乘积最大子数组）</h1>
         
 
         <div class="post-meta">
@@ -290,8 +314,8 @@
               
                 <span class="post-meta-item-text">發表於</span>
               
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-05-12T20:13:56+08:00">
-                2020-05-12
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-05-18T09:22:05+08:00">
+                2020-05-18
               </time>
             
 
@@ -300,6 +324,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -328,7 +374,36 @@
       
 
       
-        
+        <p><strong>给你一个整数数组 nums ，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。</strong></p>
+<pre><code>输入: [2,3,-2,4]
+输出: 6
+解释: 子数组 [2,3] 有最大乘积 6。
+
+输入: [-2,0,-1]
+输出: 0
+解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。
+</code></pre><p>如果nums中不含有负数，那么动态规划的思路就很简单了。dpmax[i]代表从nums[0]到nums[i]的乘积最大值。状态转移方程为：</p>
+<pre><code>dp[i] = max{nums[i],dp[i-1]*nums[i]};
+</code></pre><p>现在nums中包含负值，就设计两个dp数组，dpmax和dpmin。dpmax和dpmin意义相同，状态转移方程：</p>
+<pre><code>dpmax[i] = Math.max(Math.max(dpmax[i-1]*nums[i], nums[i]), dpmin[i-1]*nums[i]);
+
+dpmin[i] = Math.min(Math.min(dpmin[i-1]*nums[i], nums[i]), dpmax[i-1]*nums[i]);
+</code></pre><p>代码： </p>
+<pre><code>public int maxProduct(int[] nums) {
+    int[] dpmax = new int[nums.length];
+    int[] dpmin = new int[nums.length];
+    dpmax[0] = nums[0]; dpmin[0] = nums[0];
+    int res = dpmax[0];
+    for(int i=1;i&lt;nums.length;i++){
+        dpmax[i] = Math.max(Math.max(dpmax[i-1]*nums[i], nums[i]), dpmin[i-1]*nums[i]);
+        dpmin[i] = Math.min(Math.min(dpmin[i-1]*nums[i], nums[i]), dpmax[i-1]*nums[i]);
+        if(dpmax[i]&gt;res)
+            res = dpmax[i];
+    }
+    return res;
+}
+</code></pre><p>总结： dp求解的时候，首先要明确dp数组的含义。然后就可以推出状态转移方程了。</p>
+
       
     </div>
     
@@ -343,6 +418,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          
+        </div>
+      
 
       
       
@@ -352,8 +433,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/11/Leetcode322/" rel="next" title="每天一道leetcode322这题dfs居然超时">
-                <i class="fa fa-chevron-left"></i> 每天一道leetcode322这题dfs居然超时
+              <a href="/2020/05/17/leetcode210/" rel="next" title="每天一道leetcode210（拓扑排序 BFS/DFS）">
+                <i class="fa fa-chevron-left"></i> 每天一道leetcode210（拓扑排序 BFS/DFS）
               </a>
             
           </div>
@@ -362,8 +443,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/05/12/leetcode236/" rel="prev" title="每天一道leetcode236（递归回溯算法）">
-                每天一道leetcode236（递归回溯算法） <i class="fa fa-chevron-right"></i>
+              <a href="/2020/05/18/leetcode16/" rel="prev" title="每天一道leetcode16（经典三指针法O（n^2））">
+                每天一道leetcode16（经典三指针法O（n^2）） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

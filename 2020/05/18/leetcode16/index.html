@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="LeetCode," />
 
 
 
@@ -79,16 +79,28 @@
 
 
 
-<meta name="description">
+<meta name="description" content="https://leetcode-cn.com/problems/3sum-closest/
+给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。
+例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.
+
+与 target 最接近的三个数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Day Day Up">
-<meta property="og:url" content="http://yoursite.com/2020/05/12/FR中的softmax改进/index.html">
+<meta property="og:title" content="每天一道leetcode16（经典三指针法O（n^2））">
+<meta property="og:url" content="http://yoursite.com/2020/05/18/leetcode16/index.html">
 <meta property="og:site_name" content="Day Day Up">
-<meta property="og:description">
-<meta property="og:updated_time" content="2020-05-12T12:13:56.253Z">
+<meta property="og:description" content="https://leetcode-cn.com/problems/3sum-closest/
+给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。
+例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.
+
+与 target 最接近的三个数">
+<meta property="og:updated_time" content="2020-05-18T02:26:28.492Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Day Day Up">
-<meta name="twitter:description">
+<meta name="twitter:title" content="每天一道leetcode16（经典三指针法O（n^2））">
+<meta name="twitter:description" content="https://leetcode-cn.com/problems/3sum-closest/
+给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。
+例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.
+
+与 target 最接近的三个数">
 
 
 
@@ -118,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/05/12/FR中的softmax改进/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/05/18/leetcode16/"/>
 
 
 
 
 
-  <title> | Day Day Up</title>
+  <title>每天一道leetcode16（经典三指针法O（n^2）） | Day Day Up</title>
   
 
 
@@ -261,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/12/FR中的softmax改进/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/18/leetcode16/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wang Yu">
@@ -278,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">每天一道leetcode16（经典三指针法O（n^2））</h1>
         
 
         <div class="post-meta">
@@ -290,8 +302,8 @@
               
                 <span class="post-meta-item-text">發表於</span>
               
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-05-12T20:13:56+08:00">
-                2020-05-12
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-05-18T10:15:26+08:00">
+                2020-05-18
               </time>
             
 
@@ -300,6 +312,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -328,7 +362,41 @@
       
 
       
-        
+        <p><a href="https://leetcode-cn.com/problems/3sum-closest/" target="_blank" rel="external">https://leetcode-cn.com/problems/3sum-closest/</a></p>
+<p>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。</p>
+<pre><code>例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.
+
+与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).
+</code></pre><p>思路： 经典三指针法，<strong>一个固定指针i,start= i+1，end = nums.length-1.</strong></p>
+<p>i从0到循环，对于每个i,用start和end遍历剩余数组。</p>
+<pre><code>int sum = nums[i]+nums[start]+nums[end];
+</code></pre><p>如果sum&gt;target,（数组有序）,那就end–;</p>
+<p>如果sum&lt;target,（数组有序）,那就start++;</p>
+<p>别漏了sum==target的情况。</p>
+<p>代码：</p>
+<pre><code>public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        int res = nums[0]+nums[1]+nums[2];
+        for(int i=0;i&lt;nums.length;i++){// 固定指针i
+            int start = i+1;int end = nums.length-1;
+            while(start&lt;end){ // 两指针遍历
+                int sum = nums[i]+nums[start]+nums[end];
+                if( Math.abs(sum-target) &lt; Math.abs(res-target)){
+                    res = sum;
+                }
+                if(sum &gt; target)
+                    end --;
+                if(sum &lt; target)
+                    start ++;
+
+                if(sum== target){//别漏了
+                    return sum;
+                }
+            }
+        }
+        return res;
+    }
+</code></pre>
       
     </div>
     
@@ -343,6 +411,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          
+        </div>
+      
 
       
       
@@ -352,8 +426,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/11/Leetcode322/" rel="next" title="每天一道leetcode322这题dfs居然超时">
-                <i class="fa fa-chevron-left"></i> 每天一道leetcode322这题dfs居然超时
+              <a href="/2020/05/18/leetcode152/" rel="next" title="每天一道leetcode152（动态规划->乘积最大子数组）">
+                <i class="fa fa-chevron-left"></i> 每天一道leetcode152（动态规划->乘积最大子数组）
               </a>
             
           </div>
@@ -362,8 +436,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/05/12/leetcode236/" rel="prev" title="每天一道leetcode236（递归回溯算法）">
-                每天一道leetcode236（递归回溯算法） <i class="fa fa-chevron-right"></i>
+              <a href="/2020/05/21/leetcode101/" rel="prev" title="每天一道leetcode101（对称二叉树）">
+                每天一道leetcode101（对称二叉树） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
