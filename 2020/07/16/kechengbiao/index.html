@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="LeetCode," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,46 +79,31 @@
 
 
 
-<meta name="description" content="今天接了刘老板个电话，问我实验结果。关键现在的方法不适合应用在pose变化的人脸上，硬要做。烦得很。今天的每日一题很简单，就是树的层次遍历。
-给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
-示例：
-二叉树：[3,9,20,null,null,15,7],
-
-    3
-   / \
-  9  20
-    /  \
-   15   7
-返回其层次遍历结">
+<meta name="description" content="7/16/2020 4:13:57 PM 
+课程表 拓扑排序问题，判断是否存在环先记录个用dfs做的：
+思路： 依次遍历每个结点，遍历过程中遇到的结点状态值设为-1，遍历完成后的状态值设为1，初始状态值是0。
+如果dfs过程中遇到状态值为-1的结点，说明肯定有环直接返回false.
+如果dfs过程中遇到状态值为1的结点，说明被其他结点启动的dfs访问过了，肯定不存在环，返回true.
+如果dfs过">
 <meta property="og:type" content="article">
-<meta property="og:title" content="每天一道leetcode102（BFS）">
-<meta property="og:url" content="http://yoursite.com/2020/05/13/leetcode102/index.html">
+<meta property="og:title" content="Day Day Up">
+<meta property="og:url" content="http://yoursite.com/2020/07/16/kechengbiao/index.html">
 <meta property="og:site_name" content="Day Day Up">
-<meta property="og:description" content="今天接了刘老板个电话，问我实验结果。关键现在的方法不适合应用在pose变化的人脸上，硬要做。烦得很。今天的每日一题很简单，就是树的层次遍历。
-给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
-示例：
-二叉树：[3,9,20,null,null,15,7],
-
-    3
-   / \
-  9  20
-    /  \
-   15   7
-返回其层次遍历结">
-<meta property="og:updated_time" content="2020-05-21T03:01:39.589Z">
+<meta property="og:description" content="7/16/2020 4:13:57 PM 
+课程表 拓扑排序问题，判断是否存在环先记录个用dfs做的：
+思路： 依次遍历每个结点，遍历过程中遇到的结点状态值设为-1，遍历完成后的状态值设为1，初始状态值是0。
+如果dfs过程中遇到状态值为-1的结点，说明肯定有环直接返回false.
+如果dfs过程中遇到状态值为1的结点，说明被其他结点启动的dfs访问过了，肯定不存在环，返回true.
+如果dfs过">
+<meta property="og:updated_time" content="2020-07-16T08:35:13.206Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="每天一道leetcode102（BFS）">
-<meta name="twitter:description" content="今天接了刘老板个电话，问我实验结果。关键现在的方法不适合应用在pose变化的人脸上，硬要做。烦得很。今天的每日一题很简单，就是树的层次遍历。
-给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
-示例：
-二叉树：[3,9,20,null,null,15,7],
-
-    3
-   / \
-  9  20
-    /  \
-   15   7
-返回其层次遍历结">
+<meta name="twitter:title" content="Day Day Up">
+<meta name="twitter:description" content="7/16/2020 4:13:57 PM 
+课程表 拓扑排序问题，判断是否存在环先记录个用dfs做的：
+思路： 依次遍历每个结点，遍历过程中遇到的结点状态值设为-1，遍历完成后的状态值设为1，初始状态值是0。
+如果dfs过程中遇到状态值为-1的结点，说明肯定有环直接返回false.
+如果dfs过程中遇到状态值为1的结点，说明被其他结点启动的dfs访问过了，肯定不存在环，返回true.
+如果dfs过">
 
 
 
@@ -148,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/05/13/leetcode102/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/07/16/kechengbiao/"/>
 
 
 
 
 
-  <title>每天一道leetcode102（BFS） | Day Day Up</title>
+  <title> | Day Day Up</title>
   
 
 
@@ -291,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/13/leetcode102/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/16/kechengbiao/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wang Yu">
@@ -308,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">每天一道leetcode102（BFS）</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -320,8 +305,8 @@
               
                 <span class="post-meta-item-text">發表於</span>
               
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-05-13T21:17:27+08:00">
-                2020-05-13
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-07-16T16:35:13+08:00">
+                2020-07-16
               </time>
             
 
@@ -330,28 +315,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -380,53 +343,53 @@
       
 
       
-        <p>今天接了刘老板个电话，问我实验结果。关键现在的方法不适合应用在pose变化的人脸上，硬要做。烦得很。<br>今天的每日一题很简单，就是树的层次遍历。</p>
-<p><strong>给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。</strong></p>
-<pre><code>示例：
-二叉树：[3,9,20,null,null,15,7],
-
-    3
-   / \
-  9  20
-    /  \
-   15   7
-返回其层次遍历结果：
-
-[
-  [3],
-  [9,20],
-  [15,7]
-]
-</code></pre><p>思路： 利用队列，先进先出，注意记录当前层和当前层的节点数。</p>
-<p>代码：</p>
+        <p>7/16/2020 4:13:57 PM </p>
+<p>课程表 拓扑排序问题，判断是否存在环<br>先记录个用dfs做的：</p>
+<p>思路： 依次遍历每个结点，遍历过程中遇到的结点状态值设为-1，遍历完成后的状态值设为1，初始状态值是0。</p>
+<p><strong>如果dfs过程中遇到状态值为-1的结点，说明肯定有环直接返回false.</strong></p>
+<p><strong>如果dfs过程中遇到状态值为1的结点，说明被其他结点启动的dfs访问过了，肯定不存在环，返回true.</strong></p>
+<p><strong>如果dfs过程中遇到状态值为0的结点，那就再以这个结点为起点dfs.</strong></p>
 <pre><code>class Solution {
-    public List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) {
-        List&lt;List&lt;Integer&gt;&gt; res = new ArrayList();
-
-        if(root==null)
-            return res;
-
-        Queue&lt;TreeNode&gt; q = new LinkedList();
-        q.add(root);
-        int curlevel = 0;
-        while(!q.isEmpty()){
-            int level_len = q.size();//每一层的结点个数
-            res.add(new ArrayList());
-            for(int i =0;i&lt;level_len;i++){
-                TreeNode t = q.poll();
-                res.get(curlevel).add(t.val);
-                if(t.left!=null) // 每poll一个就add他的子节点进来
-                    q.add(t.left);
-                if(t.right!=null)
-                    q.add(t.right);
+    int numCourses; int[][] prerequisites;
+    int[] mem;
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        this.numCourses = numCourses; this.prerequisites = prerequisites;
+        this.mem = new int[numCourses];
+        for (int i=0;i&lt;numCourses;i++){
+            if(mem[i] ==0 ){
+                if(!dfs(i))
+                    return false;
             }
-            curlevel++;
-
         }
-        return res;
+        return true;
+    }
+    public boolean dfs(int t){
+        if(mem[t]==-1)
+            return false;
+        if(mem[t]==1)
+            return true;
+        mem[t] = -1;//当前访问结点
+
+        for(int i =0;i&lt;prerequisites.length;i++){
+            int[] pt = prerequisites[i];
+            if(pt[0]== t){
+                if(!dfs(pt[1]))
+                    return false;
+            }
+        }
+        mem[t]=1;
+        return true;
     }
 }
-</code></pre>
+</code></pre><p>但是这种题用BFS会更简单一点：</p>
+<ol>
+<li>先构造邻接表和入度表</li>
+<li>起初让 入度为 0 的课 入列</li>
+<li>然后逐个出列，课出列 即 课被选 ，并 减小相关课的入度</li>
+<li>判断是否有课的入度新变为 0，安排入列、再出列……</li>
+<li>直到没有 入度为 0 的课 可入列……</li>
+</ol>
+
       
     </div>
     
@@ -441,12 +404,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
-          
-        </div>
-      
 
       
       
@@ -456,8 +413,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/12/leetcode236/" rel="next" title="每天一道leetcode236（递归回溯算法）">
-                <i class="fa fa-chevron-left"></i> 每天一道leetcode236（递归回溯算法）
+              <a href="/2020/05/21/leetcode101/" rel="next" title="每天一道leetcode101（对称二叉树）">
+                <i class="fa fa-chevron-left"></i> 每天一道leetcode101（对称二叉树）
               </a>
             
           </div>
@@ -465,10 +422,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/14/Leetcode124/" rel="prev" title="每天一道leetcode124 (递归回溯最长路径)">
-                每天一道leetcode124 (递归回溯最长路径) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

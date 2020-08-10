@@ -261,6 +261,171 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/16/kechengbiao/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Day Day Up">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/16/kechengbiao/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-07-16T16:35:13+08:00">
+                2020-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>7/16/2020 4:13:57 PM </p>
+<p>课程表 拓扑排序问题，判断是否存在环<br>先记录个用dfs做的：</p>
+<p>思路： 依次遍历每个结点，遍历过程中遇到的结点状态值设为-1，遍历完成后的状态值设为1，初始状态值是0。</p>
+<p><strong>如果dfs过程中遇到状态值为-1的结点，说明肯定有环直接返回false.</strong></p>
+<p><strong>如果dfs过程中遇到状态值为1的结点，说明被其他结点启动的dfs访问过了，肯定不存在环，返回true.</strong></p>
+<p><strong>如果dfs过程中遇到状态值为0的结点，那就再以这个结点为起点dfs.</strong></p>
+<pre><code>class Solution {
+    int numCourses; int[][] prerequisites;
+    int[] mem;
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        this.numCourses = numCourses; this.prerequisites = prerequisites;
+        this.mem = new int[numCourses];
+        for (int i=0;i&lt;numCourses;i++){
+            if(mem[i] ==0 ){
+                if(!dfs(i))
+                    return false;
+            }
+        }
+        return true;
+    }
+    public boolean dfs(int t){
+        if(mem[t]==-1)
+            return false;
+        if(mem[t]==1)
+            return true;
+        mem[t] = -1;//当前访问结点
+
+        for(int i =0;i&lt;prerequisites.length;i++){
+            int[] pt = prerequisites[i];
+            if(pt[0]== t){
+                if(!dfs(pt[1]))
+                    return false;
+            }
+        }
+        mem[t]=1;
+        return true;
+    }
+}
+</code></pre><p>但是这种题用BFS会更简单一点：</p>
+<ol>
+<li>先构造邻接表和入度表</li>
+<li>起初让 入度为 0 的课 入列</li>
+<li>然后逐个出列，课出列 即 课被选 ，并 减小相关课的入度</li>
+<li>判断是否有课的入度新变为 0，安排入列、再出列……</li>
+<li>直到没有 入度为 0 的课 可入列……</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/21/leetcode101/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1962,168 +2127,6 @@ for (int i = 0; i &lt; len; i++) {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/11/Leetcode322/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wang Yu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Day Day Up">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/11/Leetcode322/" itemprop="url">每天一道leetcode322这题dfs居然超时</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-05-11T23:20:27+08:00">
-                2020-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。</p>
-<pre><code>输入: coins = [1, 2, 5], amount = 11
-输出: 3 
-解释: 11 = 5 + 5 + 1
-
-输入: coins = [2], amount = 3
-输出: -1
-</code></pre><p>思路： 首先想到的肯定是递归回溯深搜啊，可惜超时了。超时代码：</p>
-<pre><code>class Solution {
-    int[] coins;
-    int amount;
-    int res = 10000;
-    public int coinChange(int[] coins, int amount) {
-        if(amount==0)
-            return 0;
-        this.coins = coins;
-        this.amount = amount;
-        for(int i =0;i&lt;coins.length;i++){
-            if(coins[i]&gt;amount)
-                continue;
-            dfs(coins[i],0);
-        }
-        if(res==10000)
-            return -1;
-        else
-            return res+1;
-    }
-    public void dfs(int curAmount, int curNum) {
-        if(curAmount&gt;amount){
-            return;
-        }
-        if(curAmount == amount){
-            if(curNum&lt;res)
-                res = curNum;
-            return ;
-        }
-        for(int i =0;i&lt;coins.length;i++){
-            if(coins[i]&gt;amount)
-                continue;
-            dfs(curAmount+coins[i], curNum+1);
-        }
-    }
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2174,7 +2177,7 @@ for (int i = 0; i &lt; len; i++) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
