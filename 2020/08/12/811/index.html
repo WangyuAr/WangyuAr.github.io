@@ -80,18 +80,33 @@
 
 
 <meta name="description" content="8/12/2020 12:22:55 AM 
-#快速幂    public class Solution {        public double Power(double base, int exponent) {            if(exponent&amp;lt;0){                base = 1/base;                exponent = 0-e">
+#快速幂
+public class Solution {
+    public double Power(double base, int exponent) {
+        if(exponent&amp;lt;0){
+            base = 1/base;
+            exponent = 0-exponent;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Day Day Up">
 <meta property="og:url" content="http://yoursite.com/2020/08/12/811/index.html">
 <meta property="og:site_name" content="Day Day Up">
 <meta property="og:description" content="8/12/2020 12:22:55 AM 
-#快速幂    public class Solution {        public double Power(double base, int exponent) {            if(exponent&amp;lt;0){                base = 1/base;                exponent = 0-e">
-<meta property="og:updated_time" content="2020-08-11T16:22:56.314Z">
+#快速幂
+public class Solution {
+    public double Power(double base, int exponent) {
+        if(exponent&amp;lt;0){
+            base = 1/base;
+            exponent = 0-exponent;">
+<meta property="og:updated_time" content="2020-08-11T16:36:35.902Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Day Day Up">
 <meta name="twitter:description" content="8/12/2020 12:22:55 AM 
-#快速幂    public class Solution {        public double Power(double base, int exponent) {            if(exponent&amp;lt;0){                base = 1/base;                exponent = 0-e">
+#快速幂
+public class Solution {
+    public double Power(double base, int exponent) {
+        if(exponent&amp;lt;0){
+            base = 1/base;
+            exponent = 0-exponent;">
 
 
 
@@ -293,7 +308,7 @@
               
                 <span class="post-meta-item-text">發表於</span>
               
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-08-12T00:22:56+08:00">
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-08-12T00:36:35+08:00">
                 2020-08-12
               </time>
             
@@ -332,8 +347,29 @@
 
       
         <p>8/12/2020 12:22:55 AM </p>
-<p>#快速幂<br>    public class Solution {<br>        public double Power(double base, int exponent) {<br>            if(exponent&lt;0){<br>                base = 1/base;<br>                exponent = 0-exponent;<br>            }<br>            return helper(base, exponent);<br>        }<br>        public double helper(double base, int exponent){<br>            if(exponent==0)<br>                return 1.0;<br>            if(exponent==1)<br>                return base;<br>            double ans = helper(base, exponent/2);<br>            if(exponent%2 == 0)<br>                return ans <em>ans;<br>            else{<br>                return ans</em>ans* base;<br>            }<br>        }<br>    }</p>
-<p>#非递归的快速幂</p>
+<p>#快速幂</p>
+<pre><code>public class Solution {
+    public double Power(double base, int exponent) {
+        if(exponent&lt;0){
+            base = 1/base;
+            exponent = 0-exponent;
+        }
+        return helper(base, exponent);
+    }
+    public double helper(double base, int exponent){
+        if(exponent==0)
+            return 1.0;
+        if(exponent==1)
+            return base;
+        double ans = helper(base, exponent/2);
+        if(exponent%2 == 0)
+            return ans *ans;
+        else{
+            return ans*ans* base;
+        }
+    }
+}
+</code></pre><p>#非递归的快速幂</p>
 <pre><code>class Solution {
 public:
 
@@ -538,6 +574,23 @@ public:
             y++;
         }
     }
+</code></pre><p><strong>输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。例如输入数组{3，32，321}，则打印出这三个数字能排成的最小数字为321323。</strong><br><a href="https://www.nowcoder.com/practice/8fecd3f8ba334add803bf2a06af1b993?tpId=13&amp;tags=&amp;title=&amp;diffculty=0&amp;judgeStatus=0&amp;rp=1" target="_blank" rel="external">https://www.nowcoder.com/practice/8fecd3f8ba334add803bf2a06af1b993?tpId=13&amp;tags=&amp;title=&amp;diffculty=0&amp;judgeStatus=0&amp;rp=1</a></p>
+<pre><code>public class Solution {
+    public String PrintMinNumber(int [] numbers) {
+        List&lt;String&gt; l = new ArrayList();
+        for(int xx : numbers){
+            l.add(xx+&quot;&quot;);
+        }
+        Collections.sort(l,(a,b)-&gt;(a+b).compareTo(b+a));
+
+        StringBuilder stringBuilder2 = new StringBuilder();
+        for(String s : l){
+            stringBuilder2.append(s);
+        }
+        return stringBuilder2.toString();
+    }
+
+}
 </code></pre>
       
     </div>
