@@ -261,6 +261,682 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/14/Leetcode124/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Day Day Up">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/14/Leetcode124/" itemprop="url">每天一道leetcode124 (递归回溯最长路径)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-05-14T10:45:27+08:00">
+                2020-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天每日一题很简单，所以另外做了一道，Leecode124题。</p>
+<p><strong>给定一个非空二叉树，返回其最大路径和。<br>本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。</strong></p>
+<pre><code>输入: [1,2,3]
+
+       1
+      / \
+     2   3
+
+输出: 6
+
+输入: [-10,9,20,null,null,15,7]
+
+   -10
+   / \
+  9  20
+    /  \
+   15   7
+
+输出: 42
+</code></pre><p>思路：从根节点出发 深度优先遍历左右子树，得到左右子树的最大路径 left、right。</p>
+<p>那么 <code>max(root) = root.val + max(left,right);</code></p>
+<p>如果必须经过根节点，那么结果就是max(root)。</p>
+<p>现在可以不经过，<strong>这意味着我们要修改上面的函数，在每一步都检查哪种选择更好：是继续当前路径或者以当前节点作为最高节点计算新的路径</strong>。</p>
+<ol>
+<li>初始化 max_sum 为最小可能的整数并调用函数 max_gain(node = root)。</li>
+<li><p>实现 max_gain(node) 检查是继续旧路径还是开始新路径：</p>
+<ul>
+<li>边界情况：如果节点为空，那么最大权值是 0 。</li>
+<li><p>对该节点的所有孩子递归调用 max，计算从左右子树的最大权值：</p>
+<pre><code>`left     = max     (max(node.left), 0)和right = max(max(node.right),0)。`
+</code></pre></li>
+<li><p>检查是维护旧路径还是创建新路径。创建新路径的权值是：<br><code>price_newpath = node.val + left + right</code>，当新路径更好的时候更新 全局变量max_sum。</p>
+</li>
+<li><p>对于递归返回的到当前节点的一条最大路径，计算结果为：<br><code>node.val + max(left_gain, right_gain)</code></p>
+</li>
+</ul>
+</li>
+</ol>
+<p>代码： </p>
+<pre><code>class Solution {
+    int ans = Integer.MIN_VALUE;
+    public int maxPathSum(TreeNode root) {
+        dfs(root);
+        return ans;
+    }
+    public int dfs(TreeNode root){
+        if(root==null)
+            return 0;
+        int left = Math.max(dfs(root.left),0);
+        int right =  Math.max(dfs(root.right),0); 
+        int curpath = root.val + Math.max(left,right);
+        int newpath = root.val + left + right;
+        ans = Math.max(ans,Math.max(curpath ,newpath));
+        return curpath;
+    }
+}
+</code></pre><p>Leetcode 129题 <strong>求根到叶子节点数字之和</strong></p>
+<p><a href="https://leetcode-cn.com/problems/sum-root-to-leaf-numbers" target="_blank" rel="external">https://leetcode-cn.com/problems/sum-root-to-leaf-numbers</a></p>
+<pre><code>输入: [1,2,3]
+    1
+   / \
+  2   3
+输出: 25
+解释:
+从根到叶子节点路径 1-&gt;2 代表数字 12.
+从根到叶子节点路径 1-&gt;3 代表数字 13.
+因此，数字总和 = 12 + 13 = 25.
+
+
+输入: [4,9,0,5,1]
+    4
+   / \
+  9   0
+ / \
+5   1
+输出: 1026
+解释:
+从根到叶子节点路径 4-&gt;9-&gt;5 代表数字 495.
+从根到叶子节点路径 4-&gt;9-&gt;1 代表数字 491.
+从根到叶子节点路径 4-&gt;0 代表数字 40.
+因此，数字总和 = 495 + 491 + 40 = 1026.
+</code></pre><p>当前结点若是叶子结点，就把这条路径上的值加到全局变量ans上</p>
+<pre><code>class Solution {
+    int ans = 0;
+    public int sumNumbers(TreeNode root) {
+        dfs(root, 0);
+        return ans;
+    }
+    public int dfs(TreeNode root, int temp){
+        if(root == null)
+            return temp;
+        if(root.left == null &amp;&amp; root.right == null){
+            ans += temp *10 + root.val;
+            return temp;
+        }
+
+        temp = temp *10 +root.val;
+
+        dfs(root.left, temp);
+
+        dfs(root.right, temp);
+
+        return temp;
+    }
+}
+</code></pre><p>还做了个list 保存 每条路径值的，要回溯，感觉不是很好理解，虽然也AC了。</p>
+<pre><code>class Solution {
+
+    List&lt;List&lt;Integer&gt;&gt; res = new ArrayList();
+    public int sumNumbers(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        int ans =0 ;
+        List&lt;Integer&gt; list = new ArrayList();
+        dfs(root, list);
+        for(List&lt;Integer&gt; xx : res){
+            int t = 0; int xishu =10;
+            for(int i : xx){
+                System.out.print(i);
+                t = xishu * t +i;
+            }
+            System.out.print(&quot;   &quot;);
+            System.out.println(t);
+            ans += t;
+        }
+        return ans;
+    }
+    public void dfs(TreeNode root, List&lt;Integer&gt; list){
+        if(root == null){
+            list.add(0);//防止左子树是空的，右子树有值，回溯的时候把根节点去了
+            return ;
+        }
+        list.add(root.val);
+        if(root.right == null &amp;&amp; root.left == null){
+            res.add(new ArrayList(list));
+            return ;
+        }
+        dfs(root.left,list);
+        list.remove(list.size()-1);//回溯的时候要把左子树的结点去掉
+        dfs(root.right,list);
+        list.remove(list.size()-1);//回溯的时候要把右子树的结点去掉
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/13/leetcode102/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Day Day Up">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/13/leetcode102/" itemprop="url">每天一道leetcode102（BFS）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-05-13T21:17:27+08:00">
+                2020-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天接了刘老板个电话，问我实验结果。关键现在的方法不适合应用在pose变化的人脸上，硬要做。烦得很。<br>今天的每日一题很简单，就是树的层次遍历。</p>
+<p><strong>给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。</strong></p>
+<pre><code>示例：
+二叉树：[3,9,20,null,null,15,7],
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+返回其层次遍历结果：
+
+[
+  [3],
+  [9,20],
+  [15,7]
+]
+</code></pre><p>思路： 利用队列，先进先出，注意记录当前层和当前层的节点数。</p>
+<p>代码：</p>
+<pre><code>class Solution {
+    public List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) {
+        List&lt;List&lt;Integer&gt;&gt; res = new ArrayList();
+
+        if(root==null)
+            return res;
+
+        Queue&lt;TreeNode&gt; q = new LinkedList();
+        q.add(root);
+        int curlevel = 0;
+        while(!q.isEmpty()){
+            int level_len = q.size();//每一层的结点个数
+            res.add(new ArrayList());
+            for(int i =0;i&lt;level_len;i++){
+                TreeNode t = q.poll();
+                res.get(curlevel).add(t.val);
+                if(t.left!=null) // 每poll一个就add他的子节点进来
+                    q.add(t.left);
+                if(t.right!=null)
+                    q.add(t.right);
+            }
+            curlevel++;
+
+        }
+        return res;
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/12/leetcode236/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wang Yu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Day Day Up">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/12/leetcode236/" itemprop="url">每天一道leetcode236（递归回溯算法）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-05-12T20:33:27+08:00">
+                2020-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天的leetcode每日一题是第<strong>236题：二叉树的最近公共祖先</strong></p>
+<p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。<br><a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/" target="_blank" rel="external">https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/</a></p>
+<pre><code>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+输出: 3
+解释: 节点 5 和节点 1 的最近公共祖先是节点 3。
+</code></pre><p>思路： 这题显然就是递归回溯，过程是</p>
+<ol>
+<li>递归出口：当前结点是叶子节点</li>
+<li>依次递归root的左子树 右子树，如果p、q分别在左右子树上那就是root,如果root是p或者q，并且另一个目标数字在root的左或者右子树上，也返回root</li>
+</ol>
+<p><strong>代码：（实质上可以看作是一个后序遍历）</strong></p>
+<pre><code>class Solution {
+    TreeNode p;
+    TreeNode q;
+
+    TreeNode res;
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        this.p = p;
+        this.q = q;
+        dfs(root);
+        return res;
+    }
+    public boolean dfs(TreeNode root){
+        if(root== null){ // 递归出口，是根节点
+            return false;
+        }
+        boolean left = dfs(root.left);
+        boolean right = dfs(root.right);
+        if(left&amp;&amp;right || (root.val == p.val || root.val == q.val)&amp;&amp;(left||right))
+            res = root;
+
+        return (left||right || (root.val == p.val || root.val == q.val));
+    }
+}
+</code></pre><p>还有一道递归回溯，leetcode周赛的一道题目。<a href="https://leetcode-cn.com/problems/minimum-time-to-collect-all-apples-in-a-tree/" target="_blank" rel="external">https://leetcode-cn.com/problems/minimum-time-to-collect-all-apples-in-a-tree/</a></p>
+<p>思路： 也是后序遍历。<br><strong>先看所有子节点是否有苹果；再看自身有没有苹果。</strong></p>
+<p>代码：</p>
+<pre><code>public class Leetcode5046 {
+
+    public int minTime(int n, int[][] edges, List&lt;Boolean&gt; hasApple) {
+        Map&lt;Integer, List&lt;Integer&gt;&gt; map = new HashMap();
+        for (int i = 0; i &lt; edges.length; i++) {
+            int[] t = edges[i];
+            List&lt;Integer&gt; l = null;
+            if (map.get(t[0]) == null) {
+                l = new ArrayList();
+                l.add(t[1]);
+            } else {
+                l = map.get(t[0]);
+                l.add(t[1]);
+            }
+            map.put(t[0], l);
+        }
+        int res = 0;
+        List&lt;Integer&gt; children = map.get(0);
+        for (int childIndex : children){
+            res += dfs(n, map, hasApple, childIndex);
+        }
+        return res;
+    }
+
+    public int dfs(int n, Map&lt;Integer, List&lt;Integer&gt;&gt; map, List&lt;Boolean&gt; hasApple, int curNode) {
+        List&lt;Integer&gt; l = map.get(curNode);
+        if (l == null || l.size() == 0) {
+            if (hasApple.get(curNode) == true) {
+                return 2;
+            }
+            return 0;
+        }
+        int ans = 0;//注意！！！！！！！！！！！
+
+        for (int i = 0; i &lt; l.size(); i++) {
+            ans = ans + dfs(n, map, hasApple, l.get(i));
+        }
+
+        if (ans &gt; 0 ) {
+            return ans + 2;
+        } else if (hasApple.get(curNode) == true) {
+            return 2;
+        }else{
+            return 0;
+        }
+    }
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/12/FR中的softmax改进/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1290,148 +1966,11 @@ private Users users =new Users();
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/23/MarkDown语法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wang Yu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Day Day Up">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/01/23/MarkDown语法/" itemprop="url">MarkDown参数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2016-01-23T15:31:21+08:00">
-                2016-01-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#MarkDown语法</p>
-<p>##1.标题<br>    用#表示标题，几个#表示几级标题</p>
-<p>##2.字体</p>
-<p>###2.1<strong>加粗</strong><br>要加粗的文字左右分别用两个*号包起来</p>
-<p>###2.2<em>斜体</em><br>要倾斜的文字左右分别用一个*号包起来</p>
-<p>###2.3 <strong><em>这是斜体加粗的文字</em></strong><br>要倾斜的文字左右分别用三个个*号包起来</p>
-<p>##3.引用</p>
-<blockquote>
-<p>这是引用的内容</p>
-<blockquote>
-<p>这是引用的内容</p>
-</blockquote>
-</blockquote>
-<p>##4.分割线</p>
-<h2 id="u4E09_u4E2A_u6216_u8005_u4E09_u4E2A_u4EE5_u4E0A_u7684_-__u6216_u8005_*__u90FD_u53EF_u4EE5_u3002"><a href="#u4E09_u4E2A_u6216_u8005_u4E09_u4E2A_u4EE5_u4E0A_u7684_-__u6216_u8005_*__u90FD_u53EF_u4EE5_u3002" class="headerlink" title="三个或者三个以上的 - 或者 * 都可以。"></a>三个或者三个以上的 - 或者 * 都可以。</h2><hr>
-<hr>
-<hr>
-<p>##5.代码<br>单行代码：代码之间分别用一个反引号包起来<br><br><code>helloWorld</code><br><br>代码块：代码之间分别用三个反引号包起来，且两边的反引号单独占一行</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int <span class="tag">a</span></span><br><span class="line">double <span class="tag">b</span></span><br><span class="line"><span class="attribute">float</span> f</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1477,7 +2016,7 @@ private Users users =new Users();
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
